@@ -8,8 +8,8 @@ const cors = require("cors");
 const userRouter = require("./routes/userRoutes");
 const dotenv = require("dotenv");
 
-const indexRouter = require("./routes/index");
-const usersRouter = require("./routes/users");
+// const indexRouter = require("./routes/index");
+// const usersRouter = require("./routes/users");
 const app = express();
 
 dotenv.config({ path: "./config.env" });
@@ -30,8 +30,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
+// app.use("/", indexRouter);
+// app.use("/users", usersRouter);
 
 app.use("/api/v1/users", userRouter);
 
