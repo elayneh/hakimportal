@@ -1,0 +1,28 @@
+.navdropdownitem:hover {
+  text-decoration: none;
+  color: blue;
+  border: 0 !important;
+  box-shadow: none;
+}
+.navdropdownitem {
+  text-decoration: none;
+  background-color: black;
+  font-weight: bold;
+  color: white;
+  font-size: medium;
+  padding: 0%;
+}
+
+.navdropdownlink:hover {
+  text-decoration: none;
+}
+
+.dropdown-toggle::after {
+  display: none !important;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}

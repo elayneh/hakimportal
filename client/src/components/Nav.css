@@ -1,0 +1,120 @@
+.App-header {
+  font-size: 1.4rem;
+  color: hwb(211 13% 71%);
+  display: flex;
+  align-items: left;
+  padding-top: 0;
+  background-color: rgb(254, 222, 148);
+}
+img {
+  padding: 2%;
+  margin: 10 5 10 5;
+  display: flex;
+  width: 15%;
+}
+.nav__container {
+  width: auto;
+  display: flex;
+  justify-content: center;
+  column-gap: 27px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav__container li {
+  padding: 27px 0;
+}
+.App-header a {
+  text-decoration: none;
+  color: blue;
+  font-size: 18px;
+}
+.nav__container a.active {
+  color: red;
+}
+
+.sub__menus {
+  position: relative;
+  display: none;
+  background: rgb(254, 222, 148);
+  width: 227px;
+  left: 0;
+  z-index: 1000;
+  list-style: none;
+  margin-top: 10px;
+}
+.nav__container .sub__menus li a.active {
+  color: red;
+}
+.sub__menus li {
+  padding: 10px 0;
+  text-align: left;
+}
+.sub__menus li a {
+  color: blue;
+}
+.sub__menus__arrows {
+  position: relative;
+}
+.sub__menus__arrows svg {
+  vertical-align: middle;
+}
+@media (min-width: 840px) {
+  .sub__menus__arrows:hover .sub__menus {
+    display: block;
+  }
+}
+@media (max-width: 840px) {
+  .nav__container {
+    display: none;
+  }
+  .menubar__button:hover {
+    background-color: paleturquoise;
+  }
+  .menubar__button {
+    display: inline-block !important;
+    background-color: rgb(254, 222, 148);
+    color: blue;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    z-index: 10037;
+  }
+  .nav__container li {
+    padding: 0px 0;
+  }
+  .menubar__button svg {
+    font-size: 27px;
+  }
+  .responsive__nav__show {
+    display: block !important;
+    position: left;
+    z-index: 10007;
+    background-color: rgb(254, 222, 148);
+    padding-top: 50px;
+  }
+  .nav__container a {
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: left;
+    flex-direction: row;
+    margin-bottom: 17px;
+  }
+  .main-nav .sub__menus__arrows:hover .sub__menus {
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+  }
+  .sub__menus__Active {
+    display: block !important;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+  }
+}
+
+.dropdown-menu {
+  min-width: auto !important;
+}

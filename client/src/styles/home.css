@@ -1,0 +1,62 @@
+.Home-top {
+    display: block;
+    padding: 0%;
+    margin: 0%;
+    background-color: aliceblue;
+}
+.Home-top img{
+    display: inline-block;
+    width: 50%;
+    height: fit-content;
+    padding: 0%;
+    margin: 0%;
+}
+.Home-side {
+    display: inline-block;
+}
+
+
+.About-Service{
+    padding-top: 50px ;
+    column-count: 2;
+    position: relative;
+    column-width: auto;
+    display: block;
+}
+
+.About-Service .About {
+    display: inline-block;
+    padding-left: 10%;
+    width: fit-content;
+}
+
+.About h3{
+    display: block;
+    color: cadetblue;
+
+}
+
+.About-Service .Service{
+    padding-left: 10%;
+    display: block;
+}
+
+.Service h3{
+    display: block!important;
+    color: cadetblue;
+}
+
+.App-blog{
+    display: block;
+    padding-top: 50px;
+}
+
+
+.App-news{
+    display: block;
+    padding-top: 50px;
+    float: right;
+}
+.Home-news h3 {
+    display: block;
+}
