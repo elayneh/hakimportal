@@ -5,55 +5,70 @@ const bcrypt = require("bcryptjs");
 const userSchema = new mongoose.Schema({
   firstName: {
     type: String,
+    maxlength: [32, "First name contains too much charactoers"],
     required: [true, "First name is required"],
+    validate: {
+      validator: (val) => validator.isAlpha(val, ["en-US"], { ignore: " " }),
+      message: "First name must only  contain characters",
+    },
   },
   lastName: {
     type: String,
+    maxlength: [32, "Last name contains too much charactoers"],
     required: [true, "Last name is required"],
+    validate: {
+      validator: (val) => validator.isAlpha(val, ["en-US"], { ignore: " " }),
+      message: "Last name must only  contain characters",
+    },
   },
   email: {
     type: String,
     required: [true, "Email is required"],
-    unique: true,
+    unique: [true, "This email is registered"],
     lowercase: true,
-    validate: [validator.isEmail, "Please enter valid email"],
+    validate: [validator.isEmail, "Email is not valid"],
   },
   password: {
     type: String,
     required: [true, "Password is required"],
-    unique: true,
-    minlength: 8,
-    maxlength: 255,
+    minlength: [8, "Password too short"],
+    maxlength: [32, "Password is too long"],
     Select: false,
     trim: true,
-    select: false,
-    validate(value) {
-      if (!value.match(/\d/) || !value.match(/[a-zA-Z]/)) {
-        throw new Error(
-          "Password must contain at least one letter and one number"
-        );
-      }
+    validate: {
+      validator: function (val) {
+        const pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,32}$/;
+        return !val || !val.trim().length || pattern.test(val);
+      },
+      message:
+        "Password must contain minimum of small letter, capital letter and digits",
     },
   },
   cpassword: {
     type: String,
-    required: [true, "Confirmation required"],
+    required: [true, "Confirmation is required"],
     validate: {
       validator: function (val) {
         return val === this.password;
       },
-      msg: "Passwords did not matched",
+      message: "Passwords did not matched",
     },
   },
   age: {
     type: Number,
-    min: 0,
-    max: 150,
+    max: [150, "Age must be 150 or below"],
     required: [true, "Age is required"],
   },
   phone: {
     type: String,
-    required: [true, "Please enter the phone number"],
+    validate: {
+      validator: function (val) {
+        const pattern = /^[+]?[0-9]*(?:[0-9]*)$/;
+        return !val || !val.trim().length || pattern.test(val);
+      },
+      message: "Please provide valid phone number",
+    },
+    required: [true, "User phone number if required"],
   },
   gender: {
     type: String,

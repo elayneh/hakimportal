@@ -20,18 +20,48 @@ exports.signup = catchAsync(async (req, res, next) => {
     phone: req.body.phone,
     gender: req.body.gender,
   });
-  newUser.save();
 
-  const token = signToken(newUser._id);
-
-  res.status(201).json({
-    Headers: {
-      "Content-Type": "application/json",
-      status: "success",
+  const userFields = [
+    "firstName",
+    "lastName",
+    "email",
+    "password",
+    "cpassword",
+    "age",
+    "phone",
+    "gender",
+  ];
+  try {
+    await newUser.save();
+    const token = signToken(newUser._id);
+    res.status(200).send({
+      newUser,
       token,
-      message: "Signed up successfully!!",
-    },
-  });
+    });
+  } catch (e) {
+    {
+      const foundErrors = {
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        cpassword: "",
+        age: "",
+        phone: "",
+        gender: "",
+      };
+      userFields.forEach((field) => {
+        if (e.errors[field]) {
+          foundErrors[e.errors[field].path] = e.errors[field].message
+          // foundErrors.push(e.errors[field].path);
+        }
+      });
+      // console.log(foundErrors.field)
+      console.log("found", foundErrors);
+
+      res.status(400).send({ errors: foundErrors });
+    }
+  }
 });
 
 exports.login = catchAsync(async (req, res, next) => {
@@ -48,7 +78,6 @@ exports.login = catchAsync(async (req, res, next) => {
     return next(new AppError("Incorrect email or password", 401));
 
   // If every thing is  ok, send token to client
-  console.log("successfully logedin");
   const token = signToken(user._id);
   res.status(200).json({
     status: "success",
