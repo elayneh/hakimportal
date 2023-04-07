@@ -19,6 +19,16 @@ export default function () {
   const [gender, setGender] = useState("male");
   const [age, setAge] = useState("");
 
+  // Error state
+  const [errorFirstName, setErrorfirstName] = useState("");
+  const [errorLastName, setErrorlastName] = useState("");
+  const [errorEmail, setErroremail] = useState("");
+  const [errorPassword, setErrorpassword] = useState("");
+  const [errorCpassword, setErrorcpassword] = useState("");
+  const [errorPhone, setErrorphone] = useState("");
+  const [errorGender, setErrorgender] = useState("male");
+  const [errorAge, setErrorage] = useState("");
+
   const singupSubmitHandler = (event) => {
     const allData = {
       firstName,
@@ -35,15 +45,23 @@ export default function () {
       // We convert the React state to JSON and send it as the POST body
       body: JSON.stringify(allData),
       headers: { "Content-Type": "application/json" },
-    }).then(function (response) {
-      console.log(response);
-      return response.json();
-    });
-
-    event.preventDefault();
+    })
+      .then(function (response) {
+        console.log(response);
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setErrorfirstName(data.errors.firstName);
+        setErrorlastName(data.errors.lastName);
+        setErroremail(data.errors.email);
+        setErrorpassword(data.errors.password);
+        setErrorcpassword(data.errors.cpassword);
+        setErrorphone(data.errors.phone);
+        setErrorgender(data.errors.gender);
+        setErrorage(data.errors.age);
+      });
   };
-
-  // Login submit handler
   const signinSubmitHandler = (event) => {
     const allData = {
       email,
@@ -86,35 +104,30 @@ export default function () {
               <input
                 type="email"
                 placeholder="email"
-                // {"email", {
-                //   required: true,
-                //   pattern:
-                //     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                // }}
                 onChange={(e) => {
                   setEmail(e.target.value);
                 }}
               />
-              {/* {errors.email && (
-                <p style={{ color: "red" }}>Please enter valid email address</p>
-              )} */}
+              {errorEmail != "" ? (
+                <p style={{ color: "red" }}>{errorEmail}</p>
+              ) : (
+                ""
+              )}
             </Form.Field>
             <Form.Field className="form-field" style={{ padding: "0% 0% 4%" }}>
               <label>Password</label>
               <input
                 type="password"
                 placeholder="password"
-                // {...register("password", {
-                //   required: true,
-                //   pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$/,
-                // })}
                 onChange={(e) => {
                   setPassword(e.target.value);
                 }}
               />
-              {/* {errors.password && (
-                <p style={{ color: "red" }}>Please enter valid password </p>
-              )} */}
+              {errorPassword != "" ? (
+                <p style={{ color: "red" }}>{errorPassword}</p>
+              ) : (
+                ""
+              )}
             </Form.Field>
             <Button type="submit" className="submit-btn">
               Submit
@@ -153,128 +166,96 @@ export default function () {
             <label>First Name</label>
             <input
               placeholder="First Name"
-              required
               type="text"
-              // {...register("fistName", {
-              //   required: true,
-              //   pattern: /^[a-zA-Z]+$/,
-              // })}
               onChange={(e) => {
                 setFirstName(e.target.value);
               }}
             />
-            {/* {errors.fistName && (
-              <p style={{ color: "red" }}>Enter Valid Name</p>
-            )} */}
+            {errorFirstName != "" ? (
+              <p style={{ color: "red" }}>{errorFirstName}</p>
+            ) : (
+              ""
+            )}
           </Form.Field>
           <Form.Field className="form-field" style={{ padding: "0% 0% 4%" }}>
             <label>Last Name</label>
             <input
               placeholder="Last Name"
-              required
               type="text"
-              //   {...register("lastName", {
-              //     required: true,
-              //     pattern: /^[A-Za-z]+$/,
-              //   })}
-              //   onChange={changeHandler}
-              // />
-              // {errors.lastName && (
-              //   <p style={{ color: "red" }}>Enter Valid Name</p>
-              // )}
               onChange={(e) => {
                 setLastName(e.target.value);
               }}
             />
+            {errorLastName != "" ? (
+              <p style={{ color: "red" }}>{errorLastName}</p>
+            ) : (
+              ""
+            )}
           </Form.Field>
           <Form.Field className="form-field" style={{ padding: "0% 0% 4%" }}>
             <label>Email</label>
             <input
               type="email"
-              required
               placeholder="email"
-              //   {...register("email", {
-              //     required: true,
-              //     pattern:
-              //       /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-              //   })}
-              //   onChange={changeHandler}
-              // />
-              // {errors.email && (
-              //   <p style={{ color: "red" }}>Please enter valid email address</p>
-              // )}
               onChange={(e) => {
                 setEmail(e.target.value);
               }}
             />
+            {errorEmail != "" ? (
+              <p style={{ color: "red" }}>{errorEmail}</p>
+            ) : (
+              ""
+            )}
           </Form.Field>
           <Form.Field className="form-field" style={{ padding: "0% 0% 4%" }}>
             <label>Password</label>
             <input
               type="password"
-              required
               placeholder="password"
-              //   {...register("password", {
-              //     required: true,
-              //     pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$/,
-              //   })}
-              //   onChange={changeHandler}
-              // />
-              // {errors.password && (
-              //   <p style={{ color: "red" }}>Please enter valid password </p>
-              // )}
               onChange={(e) => {
                 setPassword(e.target.value);
               }}
             />
+            {errorPassword != "" ? (
+              <p style={{ color: "red" }}>{errorPassword}</p>
+            ) : (
+              ""
+            )}
           </Form.Field>
           <Form.Field className="form-field" style={{ padding: "0% 0% 4%" }}>
             <label>Confirm Password</label>
             <input
               type="password"
-              required
               placeholder="Confirm Password"
-              //   {...register("password", {
-              //     required: true,
-              //     pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$/,
-              //   })}
-              //   onChange={changeHandler}
-              // />
-              // {errors.password && (
-              //   <p style={{ color: "red" }}>Please enter valid password </p>
-              // )}
               onChange={(e) => {
                 setCpassword(e.target.value);
               }}
             />
+            {errorCpassword != "" ? (
+              <p style={{ color: "red" }}>{errorCpassword}</p>
+            ) : (
+              ""
+            )}
           </Form.Field>
           <Form.Field className="form-field">
             <label>Phone</label>
             <input
               type="tel"
-              required
               placeholder="phone"
-              //   {...register("tel", {
-              //     required: true,
-              //     maxLength: 13,
-              //     minLength: 10,
-              //     pattern: /^[+]?[0-9]*(?:[0-9]*)$/,
-              //   })}
-              //   onChange={changeHandler}
-              // />
-              // {errors.tel && (
-              //   <p style={{ color: "red" }}>Please enter valid phone number</p>
-              // )}
               onChange={(e) => {
                 setPhone(e.target.value);
               }}
             />
+            {errorPhone != "" ? (
+              <p style={{ color: "red" }}>{errorPhone}</p>
+            ) : (
+              ""
+            )}
           </Form.Field>
           <Form.Field className="form-field" style={{ padding: "0% 0% 4%" }}>
             <label>Gender</label>
             <select
               value={gender}
-              required
               onChange={(e) => {
                 setGender(e.target.value);
               }}
@@ -290,15 +271,12 @@ export default function () {
               type="number"
               min={0}
               max={150}
-              placeholder="age"
-              required
-              // {...register("age", {
-              //   required: true,
-              // })}
+              placeholder="Age"
               onChange={(e) => {
                 setAge(e.target.value);
               }}
             />
+            {errorAge != "" ? <p style={{ color: "red" }}>{errorAge}</p> : ""}
           </Form.Field>
           <Button type="submit">Submit</Button>
         </Form>
