@@ -10,35 +10,35 @@ import "../../styles/styles.css";
 import "../../components/Nav.css";
 
 export default function () {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  // const [firstName, setFirstName] = useState("");
+  // const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [cpassword, setCpassword] = useState("");
-  const [phone, setPhone] = useState("");
-  const [gender, setGender] = useState("male");
-  const [age, setAge] = useState("");
+  // const [cpassword, setCpassword] = useState("");
+  // const [phone, setPhone] = useState("");
+  // const [gender, setGender] = useState("male");
+  // const [age, setAge] = useState("");
 
   // Error state
-  const [errorFirstName, setErrorfirstName] = useState("");
-  const [errorLastName, setErrorlastName] = useState("");
+  // const [errorFirstName, setErrorfirstName] = useState("");
+  // const [errorLastName, setErrorlastName] = useState("");
   const [errorEmail, setErroremail] = useState("");
   const [errorPassword, setErrorpassword] = useState("");
-  const [errorCpassword, setErrorcpassword] = useState("");
-  const [errorPhone, setErrorphone] = useState("");
-  const [errorGender, setErrorgender] = useState("male");
-  const [errorAge, setErrorage] = useState("");
+  // const [errorCpassword, setErrorcpassword] = useState("");
+  // const [errorPhone, setErrorphone] = useState("");
+  // const [errorGender, setErrorgender] = useState("male");
+  // const [errorAge, setErrorage] = useState("");
 
   const singupSubmitHandler = (event) => {
     const allData = {
-      firstName,
-      lastName,
+      // firstName,
+      // lastName,
       email,
       password,
-      cpassword,
-      phone,
-      age,
-      gender,
+      // cpassword,
+      // phone,
+      // age,
+      // gender,
     };
     fetch("http://localhost:3001/api/v1/users/signup", {
       method: "POST",
@@ -52,14 +52,14 @@ export default function () {
       })
       .then((data) => {
         console.log(data);
-        setErrorfirstName(data.errors.firstName);
-        setErrorlastName(data.errors.lastName);
+        // setErrorfirstName(data.errors.firstName);
+        // setErrorlastName(data.errors.lastName);
         setErroremail(data.errors.email);
         setErrorpassword(data.errors.password);
-        setErrorcpassword(data.errors.cpassword);
-        setErrorphone(data.errors.phone);
-        setErrorgender(data.errors.gender);
-        setErrorage(data.errors.age);
+        // setErrorcpassword(data.errors.cpassword);
+        // setErrorphone(data.errors.phone);
+        // setErrorgender(data.errors.gender);
+        // setErrorage(data.errors.age);
       });
   };
   const signinSubmitHandler = (event) => {
