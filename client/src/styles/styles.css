@@ -542,7 +542,7 @@ padding-top: 2%;
   }
   
   .hero-homepage {
-    background-image: url(../assets/images/banner-home.jpg);
+    /* background-image: url(../assets/images/banner-home.jpg); */
     background-position: 65% 8rem;
     background-repeat: no-repeat;
     background-size: 90rem auto;
